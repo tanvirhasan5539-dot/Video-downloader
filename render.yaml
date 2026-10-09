@@ -1,0 +1,33 @@
+# ============================================================
+# Render Blueprint — VideoDown
+# ============================================================
+# Deploy:
+#   1. Push these files to a GitHub repo:
+#        videodown.py  requirements.txt  Dockerfile  render.yaml
+#   2. Render Dashboard → "New +" → "Blueprint" → pick the repo.
+#   3. Done — service URL: https://<name>.onrender.com
+#
+# FREE plan notes:
+#   • Instance sleeps after ~15 min without traffic (first visit
+#     after sleep takes ~1 minute to wake up — normal).
+#   • Filesystem is EPHEMERAL: login cookies/settings reset on every
+#     redeploy/restart. That's fine for casual use.
+#
+# To KEEP cookies & settings across redeploys (paid Starter+ plan):
+#   • change `plan: free` → `plan: starter`
+#   • uncomment the `disk:` block below.
+# ============================================================
+
+services:
+  - type: web
+    name: videodown
+    runtime: docker          # builds the Dockerfile in this repo (includes ffmpeg)
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: VD_DATA_DIR
+        value: /app/data
+    # disk:
+    #   name: videodown-data
+    #   mountPath: /app/data
+    #   sizeGB: 1
