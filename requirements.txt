@@ -1,0 +1,16 @@
+# VideoDown — Python dependencies
+#   pip install -r requirements.txt
+#   python videodown.py        → http://localhost:5000
+#
+# Python 3.9+
+
+flask>=3.0
+gunicorn>=22.0          # production WSGI server (used on Render / Docker)
+yt-dlp>=2025.1.1        # video extraction/download engine (update often — sites change)
+curl-cffi>=0.7          # browser impersonation: much better TikTok / Instagram / Facebook success
+
+# System dependency (not pip):  ffmpeg
+#   Debian/Ubuntu:  sudo apt install ffmpeg   (Docker image already installs it)
+#   Windows:        https://ffmpeg.org/download.html  (add to PATH)
+#   macOS:          brew install ffmpeg
+# Needed for: MP3 conversion + 1080p/720p (DASH video+audio) merging.
